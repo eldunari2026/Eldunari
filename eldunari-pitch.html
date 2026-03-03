@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eldunari.ai — Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-card: #16161f;
+  --accent: #00e5a0;
+  --accent-dim: #00e5a020;
+  --accent-mid: #00e5a060;
+  --text-primary: #f0f0f5;
+  --text-secondary: #8888a0;
+  --text-muted: #55556a;
+  --orange: #ff6b35;
+  --red-soft: #ff4d6a;
+  --blue: #4d8eff;
+  --purple: #a855f7;
+  --gold: #fbbf24;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ======================== GLOBAL ANIMATIONS ======================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-18px); }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+@keyframes orbitReverse {
+  0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+  100% { transform: rotate(-360deg) translateX(80px) rotate(360deg); }
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes ripple {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blinkCaret {
+  50% { border-color: transparent; }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+.stagger-7 { transition-delay: 0.7s; }
+.stagger-8 { transition-delay: 0.8s; }
+
+/* ======================== NAVIGATION ======================== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.nav-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--text-muted); font-size: 14px; font-family: 'DM Sans', sans-serif; margin-left: 8px; }
+.nav-dots {
+  display: flex;
+  gap: 8px;
+}
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  border: none;
+}
+.nav-dot.active {
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-mid);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ======================== SECTIONS ======================== */
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-inner {
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* ======================== SLIDE 1: HERO ======================== */
+#hero {
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 40%, rgba(0, 229, 160, 0.06) 0%, transparent 60%);
+}
+#hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.hero-orb-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+}
+.hero-orb-1 {
+  width: 10px; height: 10px;
+  background: var(--accent);
+  animation: orbit 8s linear infinite;
+  top: 50%; left: 50%;
+  box-shadow: 0 0 20px var(--accent);
+}
+.hero-orb-2 {
+  width: 6px; height: 6px;
+  background: var(--purple);
+  animation: orbitReverse 12s linear infinite;
+  top: 50%; left: 50%;
+  box-shadow: 0 0 15px var(--purple);
+}
+.hero-orb-3 {
+  width: 8px; height: 8px;
+  background: var(--blue);
+  animation: orbit 16s linear infinite reverse;
+  top: 50%; left: 50%;
+  box-shadow: 0 0 15px var(--blue);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 40px;
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  background: rgba(0, 229, 160, 0.05);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(56px, 8vw, 110px);
+  line-height: 1.0;
+  letter-spacing: -3px;
+  margin-bottom: 12px;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+.hero-title .accent {
+  background: linear-gradient(135deg, var(--accent), #00b8d4, var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+.hero-tagline {
+  font-size: clamp(20px, 2.5vw, 28px);
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-top: 24px;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+  letter-spacing: -0.3px;
+}
+.hero-tagline em {
+  font-style: italic;
+  font-family: 'Instrument Serif', serif;
+  color: var(--text-primary);
+  font-size: 1.08em;
+}
+
+.hero-line {
+  width: 60px;
+  height: 2px;
+  background: var(--accent);
+  margin: 40px auto 0;
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+  box-shadow: 0 0 20px var(--accent-mid);
+}
+
+/* ======================== SLIDE 2: THE PITCH ======================== */
+#pitch {
+  background: var(--bg-secondary);
+}
+#pitch::before {
+  content: '';
+  position: absolute;
+  top: 0; right: -200px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(77, 142, 255, 0.04) 0%, transparent 70%);
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.pitch-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.pitch-left h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin-bottom: 28px;
+}
+.pitch-left h2 .highlight {
+  color: var(--accent);
+}
+
+.pitch-left p {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 480px;
+}
+
+.pitch-visual {
+  position: relative;
+  height: 400px;
+}
+
+.pitch-node {
+  position: absolute;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pitch-node:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+.pitch-node-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.node-docs { top: 20px; left: 10px; animation: float 5s ease-in-out infinite; }
+.node-docs .pitch-node-icon { background: rgba(255, 107, 53, 0.15); }
+.node-extract { top: 110px; right: 0; animation: float 6s ease-in-out 0.5s infinite; }
+.node-extract .pitch-node-icon { background: rgba(77, 142, 255, 0.15); }
+.node-validate { top: 220px; left: 30px; animation: float 5.5s ease-in-out 1s infinite; }
+.node-validate .pitch-node-icon { background: rgba(168, 85, 247, 0.15); }
+.node-enter { top: 320px; right: 20px; animation: float 7s ease-in-out 1.5s infinite; }
+.node-enter .pitch-node-icon { background: rgba(0, 229, 160, 0.15); }
+
+.pitch-center-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.15;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Connector lines */
+.pitch-connector {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.pitch-connector line {
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.12;
+  stroke-dasharray: 6 4;
+  animation: drawLine 3s ease-in-out infinite alternate;
+}
+
+/* ======================== SLIDE 3: USE CASES ======================== */
+#usecases {
+  background: var(--bg-primary);
+}
+
+.usecases-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.usecases-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.usecases-header p {
+  color: var(--text-secondary);
+  font-size: 17px;
+}
+
+.usecases-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.usecase-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.usecase-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.usecase-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 229, 160, 0.15);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.usecase-card:hover::before {
+  opacity: 1;
+}
+
+.usecase-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 18px;
+}
+
+.usecase-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+.usecase-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.uc-tax .usecase-icon { background: rgba(0, 229, 160, 0.12); }
+.uc-compliance .usecase-icon { background: rgba(77, 142, 255, 0.12); }
+.uc-finance .usecase-icon { background: rgba(168, 85, 247, 0.12); }
+.uc-legal .usecase-icon { background: rgba(255, 107, 53, 0.12); }
+.uc-insurance .usecase-icon { background: rgba(251, 191, 36, 0.12); }
+.uc-logistics .usecase-icon { background: rgba(255, 77, 106, 0.12); }
+.uc-realestate .usecase-icon { background: rgba(0, 184, 212, 0.12); }
+
+/* ======================== SLIDE 4: THE PROBLEM ======================== */
+#problem {
+  background: var(--bg-secondary);
+  position: relative;
+}
+#problem::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(255, 77, 106, 0.04) 0%, transparent 70%);
+}
+
+.problem-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.problem-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.problem-header p {
+  color: var(--text-secondary);
+  font-size: 17px;
+}
+.problem-header .target-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(255, 107, 53, 0.08);
+  border: 1px solid rgba(255, 107, 53, 0.15);
+  font-size: 13px;
+  color: var(--orange);
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.problem-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 800px;
+  margin: 0 auto 56px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,77,106,0.03) 0%, transparent 50%);
+}
+
+.stat-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 500;
+  color: var(--red-soft);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.stat-label {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.problem-quote {
+  text-align: center;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 26px);
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+.problem-quote span {
+  color: var(--text-primary);
+}
+
+/* ======================== SLIDE 5: OUTSOURCING ======================== */
+#outsourcing {
+  background: var(--bg-primary);
+}
+
+.outsource-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.outsource-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.outsource-header p { color: var(--text-secondary); font-size: 17px; }
+
+.outsource-layout {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.outsource-side {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.outsource-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--text-muted);
+  padding-top: 60px;
+}
+
+.outsource-good h3 {
+  color: var(--accent);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.outsource-good .big-stat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 48px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.outsource-good .big-label {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.outsource-bad h3 {
+  color: var(--red-soft);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+.outsource-risk {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.outsource-risk:last-child { margin-bottom: 0; }
+.outsource-risk-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 77, 106, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.outsource-risk h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.outsource-risk p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.outsource-bottom {
+  text-align: center;
+  margin-top: 48px;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+/* ======================== SLIDE 6: AI UNLOCK ======================== */
+#ai-unlock {
+  background: var(--bg-secondary);
+  position: relative;
+}
+#ai-unlock::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 160, 0.04) 0%, transparent 60%);
+}
+
+.ai-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.ai-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.ai-header p { color: var(--text-secondary); font-size: 17px; max-width: 560px; margin: 0 auto; }
+
+.cost-bars {
+  max-width: 700px;
+  margin: 0 auto 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cost-bar-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 80px;
+  align-items: center;
+  gap: 20px;
+}
+.cost-bar-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: right;
+}
+.cost-bar-track {
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+  position: relative;
+}
+.cost-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 0;
+}
+.cost-bar-fill.animated { /* JS will set width */ }
+.bar-onshore { background: linear-gradient(90deg, rgba(255, 77, 106, 0.4), rgba(255, 77, 106, 0.2)); }
+.bar-offshore { background: linear-gradient(90deg, rgba(255, 107, 53, 0.4), rgba(255, 107, 53, 0.2)); }
+.bar-ai { background: linear-gradient(90deg, rgba(0, 229, 160, 0.5), rgba(0, 229, 160, 0.2)); }
+.cost-bar-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 500;
+}
+.pct-red { color: var(--red-soft); }
+.pct-orange { color: var(--orange); }
+.pct-green { color: var(--accent); }
+
+.ai-whitespace {
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 32px 40px;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+.ws-stat {
+  text-align: center;
+}
+.ws-stat .ws-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--accent);
+}
+.ws-stat .ws-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ======================== SLIDE 7: DATA CONTROL ======================== */
+#datacontrol {
+  background: var(--bg-primary);
+  position: relative;
+}
+
+.dc-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.dc-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.dc-header p { color: var(--text-secondary); font-size: 17px; max-width: 600px; margin: 0 auto; }
+
+.dc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.dc-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+.dc-card:hover {
+  border-color: rgba(0, 229, 160, 0.12);
+  transform: translateY(-4px);
+}
+.dc-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 18px;
+  background: rgba(0, 229, 160, 0.08);
+}
+.dc-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+.dc-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.dc-compliance {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.compliance-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 40px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+.compliance-badge:hover {
+  border-color: rgba(0, 229, 160, 0.2);
+  color: var(--accent);
+}
+.compliance-badge .badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ======================== SLIDE 8: CASE STUDIES ======================== */
+#cases {
+  background: var(--bg-secondary);
+}
+
+.cases-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.cases-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.cases-header p { color: var(--text-secondary); font-size: 17px; }
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.case-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+.case-card:hover {
+  border-color: rgba(0, 229, 160, 0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.case-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.case-1::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+.case-2::before { background: linear-gradient(90deg, var(--accent), #00b8d4); }
+
+.case-badge {
+  display: inline-flex;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+.case-1 .case-badge { background: rgba(77, 142, 255, 0.1); color: var(--blue); }
+.case-2 .case-badge { background: rgba(0, 229, 160, 0.1); color: var(--accent); }
+
+.case-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.case-card .case-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.case-workflows {
+  margin-bottom: 28px;
+}
+.case-workflows h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.case-workflow-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.case-tag {
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  font-size: 12px;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.case-impact {
+  display: flex;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.case-impact-stat {
+  text-align: center;
+  flex: 1;
+}
+.case-impact-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.case-1 .case-impact-num { color: var(--blue); }
+.case-2 .case-impact-num { color: var(--accent); }
+.case-impact-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ======================== SCROLL PROGRESS ======================== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  z-index: 200;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* ======================== GRID BACKGROUND ======================== */
+.grid-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* ======================== NOISE TEXTURE ======================== */
+.noise {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ======================== RESPONSIVE ======================== */
+@media (max-width: 900px) {
+  section { padding: 100px 28px; }
+  nav { padding: 16px 24px; }
+  .pitch-layout { grid-template-columns: 1fr; gap: 48px; }
+  .pitch-visual { height: 320px; }
+  .usecases-grid { grid-template-columns: repeat(2, 1fr); }
+  .problem-stats { grid-template-columns: 1fr; }
+  .outsource-layout { grid-template-columns: 1fr; }
+  .outsource-divider { padding: 20px 0; transform: rotate(90deg); }
+  .dc-grid { grid-template-columns: 1fr; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .cost-bar-row { grid-template-columns: 100px 1fr 60px; gap: 12px; }
+  .ai-whitespace { flex-direction: column; gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Eldunari<span>.ai</span></div>
+  <div class="nav-dots">
+    <button class="nav-dot active" data-section="hero"></button>
+    <button class="nav-dot" data-section="pitch"></button>
+    <button class="nav-dot" data-section="usecases"></button>
+    <button class="nav-dot" data-section="problem"></button>
+    <button class="nav-dot" data-section="outsourcing"></button>
+    <button class="nav-dot" data-section="ai-unlock"></button>
+    <button class="nav-dot" data-section="datacontrol"></button>
+    <button class="nav-dot" data-section="cases"></button>
+  </div>
+</nav>
+
+<!-- ==================== SLIDE 1: HERO ==================== -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-orb-container">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+  </div>
+  <div class="section-inner" style="text-align:center;">
+    <div class="hero-badge">AI-First Workflow Automation</div>
+    <h1 class="hero-title"><span class="accent">Eldunari</span>.ai</h1>
+    <p class="hero-tagline">Automate the Admin. <em>Unlock the Growth.</em></p>
+    <div class="hero-line"></div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 2: THE PITCH ==================== -->
+<section id="pitch">
+  <div class="grid-bg"></div>
+  <div class="section-inner">
+    <div class="pitch-layout">
+      <div class="pitch-left reveal-left">
+        <h2>We automate <span class="highlight">Knowledge Entry</span> workflows with an AI-first approach</h2>
+        <p>Businesses pour enormous time and money into repetitive data input — extracting information from documents, entering it into systems, validating and reconciling. Eldunari replaces these manual workflows with intelligent AI agents that are faster, cheaper, and more accurate.</p>
+      </div>
+      <div class="pitch-visual reveal-right">
+        <svg class="pitch-connector" viewBox="0 0 500 400">
+          <line x1="160" y1="45" x2="250" y2="200" />
+          <line x1="380" y1="135" x2="250" y2="200" />
+          <line x1="160" y1="245" x2="250" y2="200" />
+          <line x1="380" y1="345" x2="250" y2="200" />
+        </svg>
+        <div class="pitch-center-orb"></div>
+        <div class="pitch-node node-docs">
+          <div class="pitch-node-icon">📄</div>
+          <div>Documents In</div>
+        </div>
+        <div class="pitch-node node-extract">
+          <div class="pitch-node-icon">🔍</div>
+          <div>AI Extraction</div>
+        </div>
+        <div class="pitch-node node-validate">
+          <div class="pitch-node-icon">✓</div>
+          <div>Smart Validation</div>
+        </div>
+        <div class="pitch-node node-enter">
+          <div class="pitch-node-icon">⚡</div>
+          <div>Auto-Entry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 3: USE CASES ==================== -->
+<section id="usecases">
+  <div class="grid-bg"></div>
+  <div class="section-inner">
+    <div class="usecases-header reveal">
+      <h2>One capability. Endless applications.</h2>
+      <p>Knowledge Entry powers workflows across every industry</p>
+    </div>
+    <div class="usecases-grid">
+      <div class="usecase-card uc-tax reveal stagger-1">
+        <div class="usecase-icon">🧾</div>
+        <h3>Tax Filing</h3>
+        <p>Income, expenses & deductions extracted and entered into returns automatically</p>
+      </div>
+      <div class="usecase-card uc-compliance reveal stagger-2">
+        <div class="usecase-icon">📋</div>
+        <h3>Regulatory & Compliance</h3>
+        <p>Periodic submissions to regulators — RBI, SEBI, HMRC, SEC and more</p>
+      </div>
+      <div class="usecase-card uc-finance reveal stagger-3">
+        <div class="usecase-icon">📊</div>
+        <h3>Financial Reporting</h3>
+        <p>Journal entries, trial balance prep & consolidation data input</p>
+      </div>
+      <div class="usecase-card uc-legal reveal stagger-4">
+        <div class="usecase-icon">⚖️</div>
+        <h3>Legal & Contracts</h3>
+        <p>Clause extraction, contract metadata entry & IP filings</p>
+      </div>
+      <div class="usecase-card uc-insurance reveal stagger-5">
+        <div class="usecase-icon">🛡️</div>
+        <h3>Insurance Claims</h3>
+        <p>Claims capture, policy details & adjudication preparation</p>
+      </div>
+      <div class="usecase-card uc-logistics reveal stagger-6">
+        <div class="usecase-icon">🚚</div>
+        <h3>Logistics & Supply Chain</h3>
+        <p>Purchase orders, invoices & customs documentation</p>
+      </div>
+      <div class="usecase-card uc-realestate reveal stagger-7">
+        <div class="usecase-icon">🏢</div>
+        <h3>Real Estate & Property</h3>
+        <p>Lease data, tenant records & valuation inputs</p>
+      </div>
+      <div class="usecase-card reveal stagger-8" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-style:dashed;border-color:rgba(255,255,255,0.08);">
+        <div style="font-size:32px;margin-bottom:12px;opacity:0.4;">+</div>
+        <h3 style="color:var(--text-muted);">And More</h3>
+        <p>Any workflow involving structured data entry from unstructured sources</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 4: THE PROBLEM ==================== -->
+<section id="problem">
+  <div class="grid-bg"></div>
+  <div class="section-inner">
+    <div class="problem-header reveal">
+      <div class="target-badge">🎯 SMBs & Independent Consultants</div>
+      <h2>Your best people are stuck<br>doing data entry</h2>
+      <p>The hours and money lost to manual knowledge entry are staggering</p>
+    </div>
+    <div class="problem-stats">
+      <div class="stat-card reveal stagger-1">
+        <div class="stat-number">~20%</div>
+        <div class="stat-label">of productive time consumed by<br>knowledge entry tasks</div>
+      </div>
+      <div class="stat-card reveal stagger-2">
+        <div class="stat-number">~30%</div>
+        <div class="stat-label">of operational costs tied to admin<br>data workflows</div>
+      </div>
+    </div>
+    <div class="problem-quote reveal stagger-3">
+      Every hour spent on data entry is an hour <span>not</span> spent on business development, client relationships, or strategic growth.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 5: OUTSOURCING ==================== -->
+<section id="outsourcing">
+  <div class="grid-bg"></div>
+  <div class="section-inner">
+    <div class="outsource-header reveal">
+      <h2>Offshore saves money.<br>But you pay in other ways.</h2>
+      <p>Outsourcing shifts cost from one line item to another — it doesn't solve the problem</p>
+    </div>
+    <div class="outsource-layout">
+      <div class="outsource-side outsource-good reveal-left">
+        <h3>The Upside</h3>
+        <div class="big-stat">~50%</div>
+        <div class="big-label">cheaper than onshore labour<br>on average</div>
+      </div>
+      <div class="outsource-divider reveal-scale">⇄</div>
+      <div class="outsource-side outsource-bad reveal-right">
+        <h3>The Downside</h3>
+        <div class="outsource-risk">
+          <div class="outsource-risk-icon">🔓</div>
+          <div>
+            <h4>Data Control</h4>
+            <p>Sensitive data leaves your perimeter and jurisdiction</p>
+          </div>
+        </div>
+        <div class="outsource-risk">
+          <div class="outsource-risk-icon">🐢</div>
+          <div>
+            <h4>Low Agility</h4>
+            <p>SLA-bound, timezone gaps, slow iteration cycles</p>
+          </div>
+        </div>
+        <div class="outsource-risk">
+          <div class="outsource-risk-icon">⚠️</div>
+          <div>
+            <h4>Disruption Risk</h4>
+            <p>Vendor attrition, quality inconsistency, lock-in</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="outsource-bottom reveal">
+      "Outsourcing doesn't eliminate the problem — it relocates it."
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 6: AI UNLOCK ==================== -->
+<section id="ai-unlock">
+  <div class="grid-bg"></div>
+  <div class="section-inner">
+    <div class="ai-header reveal">
+      <h2>AI doesn't just cut costs.<br>It changes the economics.</h2>
+      <p>From incremental savings to structural transformation</p>
+    </div>
+    <div class="cost-bars reveal stagger-1" id="costBars">
+      <div class="cost-bar-row">
+        <div class="cost-bar-label">Onshore Labour</div>
+        <div class="cost-bar-track">
+          <div class="cost-bar-fill bar-onshore" data-width="100%">Baseline</div>
+        </div>
+        <div class="cost-bar-pct pct-red">100%</div>
+      </div>
+      <div class="cost-bar-row">
+        <div class="cost-bar-label">Offshore</div>
+        <div class="cost-bar-track">
+          <div class="cost-bar-fill bar-offshore" data-width="50%">~50% savings</div>
+        </div>
+        <div class="cost-bar-pct pct-orange">50%</div>
+      </div>
+      <div class="cost-bar-row">
+        <div class="cost-bar-label">AI · Eldunari</div>
+        <div class="cost-bar-track">
+          <div class="cost-bar-fill bar-ai" data-width="18%">70–90% savings</div>
+        </div>
+        <div class="cost-bar-pct pct-green">10–30%</div>
+      </div>
+    </div>
+    <div class="ai-whitespace reveal stagger-2">
+      <div class="ws-stat">
+        <div class="ws-num">96.5%</div>
+        <div class="ws-label">of automation adopters report<br>significant workload reduction</div>
+      </div>
+      <div style="width:1px;background:rgba(255,255,255,0.06);"></div>
+      <div class="ws-stat">
+        <div class="ws-num">~50%</div>
+        <div class="ws-label">of businesses haven't adopted<br>automation yet — massive white space</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 7: DATA CONTROL ==================== -->
+<section id="datacontrol">
+  <div class="grid-bg"></div>
+  <div class="section-inner">
+    <div class="dc-header reveal">
+      <h2>Your data stays yours. Always.</h2>
+      <p>Bespoke solutioning — not a one-size-fits-all SaaS / LLM / GPT</p>
+    </div>
+    <div class="dc-grid">
+      <div class="dc-card reveal stagger-1">
+        <div class="dc-card-icon">🧩</div>
+        <h3>LLM-Agnostic Architecture</h3>
+        <p>Deploy AI privately and securely — no vendor lock-in to any single model. We integrate the right LLM for your use case.</p>
+      </div>
+      <div class="dc-card reveal stagger-2">
+        <div class="dc-card-icon">🔒</div>
+        <h3>Private & Secure Deployment</h3>
+        <p>Public cloud (AWS / Azure / GCP), private cloud, or on-prem. Data hosted in your local geography — never leaves your jurisdiction.</p>
+      </div>
+      <div class="dc-card reveal stagger-3">
+        <div class="dc-card-icon">💰</div>
+        <h3>Cost-Effective by Design</h3>
+        <p>Built on open-source LLMs with manageable token costs. No bloated enterprise licensing — modern cloud-native architecture.</p>
+      </div>
+      <div class="dc-card reveal stagger-4">
+        <div class="dc-card-icon">🛡️</div>
+        <h3>Encrypted & Sovereign</h3>
+        <p>Data encrypted at rest and in transit. Full data sovereignty — your information stays within your organisational boundary.</p>
+      </div>
+      <div class="dc-card reveal stagger-5">
+        <div class="dc-card-icon">🎛️</div>
+        <h3>Full Control</h3>
+        <p>You own the infrastructure, the data, and the models. AI deployed in a private, secure, controlled way — on your terms.</p>
+      </div>
+      <div class="dc-card reveal stagger-6">
+        <div class="dc-card-icon">📐</div>
+        <h3>Bespoke, Not Generic</h3>
+        <p>Every deployment is tailored to your workflows, your data structure, and your compliance requirements. No cookie-cutter solutions.</p>
+      </div>
+    </div>
+    <div class="dc-compliance reveal stagger-7">
+      <div class="compliance-badge"><span class="badge-dot"></span>GDPR Compliant</div>
+      <div class="compliance-badge"><span class="badge-dot"></span>ICO Registered</div>
+      <div class="compliance-badge"><span class="badge-dot"></span>SOC 2 Ready</div>
+      <div class="compliance-badge"><span class="badge-dot"></span>ISO 27001 Aligned</div>
+      <div class="compliance-badge"><span class="badge-dot"></span>DPDPA (India) Compliant</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 8: CASE STUDIES ==================== -->
+<section id="cases">
+  <div class="grid-bg"></div>
+  <div class="section-inner">
+    <div class="cases-header reveal">
+      <h2>Eldunari in Action</h2>
+      <p>Real workflows. Real impact.</p>
+    </div>
+    <div class="cases-grid">
+
+      <!-- CASE 1: PE Fund -->
+      <div class="case-card case-1 reveal-left">
+        <div class="case-badge">Private Equity</div>
+        <h3>Mid-Market PE Fund</h3>
+        <p class="case-desc">40-person fund, $2B AUM across buyout and growth equity. Heavy reliance on Excel, SharePoint, and manual processes across the investment lifecycle.</p>
+        <div class="case-workflows">
+          <h4>Workflows Automated</h4>
+          <div class="case-workflow-tags">
+            <span class="case-tag">Deal pipeline data entry</span>
+            <span class="case-tag">Portfolio co. reporting</span>
+            <span class="case-tag">LP reporting compilation</span>
+            <span class="case-tag">Compliance filings</span>
+          </div>
+        </div>
+        <div class="case-impact">
+          <div class="case-impact-stat">
+            <div class="case-impact-num">60–70%</div>
+            <div class="case-impact-label">Time savings</div>
+          </div>
+          <div class="case-impact-stat">
+            <div class="case-impact-num">$250–350K</div>
+            <div class="case-impact-label">Annual savings / redeployment</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 2: E2E Comply -->
+      <div class="case-card case-2 reveal-right">
+        <div class="case-badge">Tax Filing · UK</div>
+        <h3>e2ecomply.com</h3>
+        <p class="case-desc">Self-serve AI tax filing for UK independent employees and small business owners, built in collaboration with local Chartered Accountants.</p>
+        <div class="case-workflows">
+          <h4>Workflows Automated</h4>
+          <div class="case-workflow-tags">
+            <span class="case-tag">Self Assessment (SA100)</span>
+            <span class="case-tag">Corporation Tax (CT600)</span>
+            <span class="case-tag">Expense categorisation</span>
+            <span class="case-tag">Relief identification</span>
+          </div>
+        </div>
+        <div class="case-impact">
+          <div class="case-impact-stat">
+            <div class="case-impact-num">50%</div>
+            <div class="case-impact-label">Cost savings</div>
+          </div>
+          <div class="case-impact-stat">
+            <div class="case-impact-num">~5x</div>
+            <div class="case-impact-label">Productivity increase</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+// ==================== SCROLL REVEAL ====================
+const observerOptions = {
+  threshold: 0.15,
+  rootMargin: '0px 0px -40px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+  observer.observe(el);
+});
+
+// ==================== COST BAR ANIMATION ====================
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const fills = entry.target.querySelectorAll('.cost-bar-fill');
+      fills.forEach((fill, i) => {
+        setTimeout(() => {
+          fill.style.width = fill.dataset.width;
+        }, i * 300);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+const costBars = document.getElementById('costBars');
+if (costBars) barObserver.observe(costBars);
+
+// ==================== SCROLL PROGRESS ====================
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+});
+
+// ==================== NAV DOTS ====================
+const sections = document.querySelectorAll('section');
+const navDots = document.querySelectorAll('.nav-dot');
+
+navDots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const target = document.getElementById(dot.dataset.section);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navDots.forEach(d => d.classList.remove('active'));
+      const activeDot = document.querySelector(`.nav-dot[data-section="${entry.target.id}"]`);
+      if (activeDot) activeDot.classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+
+sections.forEach(s => sectionObserver.observe(s));
+</script>
+
+</body>
+</html>
