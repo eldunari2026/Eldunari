@@ -351,114 +351,93 @@ section {
 /* ======================== SLIDE 2: THE PITCH ======================== */
 #pitch {
   background: var(--bg-secondary);
+  position: relative;
 }
 #pitch::before {
   content: '';
   position: absolute;
   top: 0; right: -200px;
-  width: 500px; height: 500px;
+  width: 600px; height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(247, 140, 0, 0.04) 0%, transparent 70%);
-  animation: floatSlow 8s ease-in-out infinite;
+  background: radial-gradient(circle, var(--bg-wash) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .pitch-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 100px;
   align-items: center;
 }
 
 .pitch-left h2 {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 4vw, 52px);
-  line-height: 1.15;
-  letter-spacing: -1.5px;
-  margin-bottom: 28px;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 32px;
   color: var(--text-primary);
+  font-weight: 400;
 }
 .pitch-left h2 .highlight {
   color: var(--accent);
 }
 
 .pitch-left p {
-  font-size: 17px;
+  font-size: 18px;
   color: var(--text-secondary);
-  line-height: 1.75;
+  line-height: 1.8;
   max-width: 480px;
 }
 
-.pitch-visual {
-  position: relative;
-  height: 400px;
+.pitch-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.pitch-node {
-  position: absolute;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px 22px;
+.pitch-step {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
-  box-shadow: var(--shadow-md);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 20px;
+  padding: 24px 28px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s var(--ease-spring);
 }
-.pitch-node:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: var(--shadow-lg);
+.pitch-step:hover {
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.02);
 }
 
-.pitch-node-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+.pitch-step-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
   flex-shrink: 0;
 }
+.pitch-step-1 .pitch-step-num { background: rgba(247, 140, 0, 0.08); color: var(--accent); }
+.pitch-step-2 .pitch-step-num { background: rgba(59, 130, 246, 0.08); color: var(--blue); }
+.pitch-step-3 .pitch-step-num { background: rgba(139, 92, 246, 0.08); color: var(--purple); }
+.pitch-step-4 .pitch-step-num { background: rgba(247, 140, 0, 0.08); color: var(--accent); }
 
-.node-docs { top: 20px; left: 10px; animation: float 5s ease-in-out infinite; }
-.node-docs .pitch-node-icon { background: rgba(247, 140, 0, 0.1); }
-.node-extract { top: 110px; right: 0; animation: float 6s ease-in-out 0.5s infinite; }
-.node-extract .pitch-node-icon { background: rgba(59, 130, 246, 0.1); }
-.node-validate { top: 220px; left: 30px; animation: float 5.5s ease-in-out 1s infinite; }
-.node-validate .pitch-node-icon { background: rgba(139, 92, 246, 0.1); }
-.node-enter { top: 320px; right: 20px; animation: float 7s ease-in-out 1.5s infinite; }
-.node-enter .pitch-node-icon { background: rgba(247, 140, 0, 0.1); }
-
-.pitch-center-orb {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-  opacity: 0.1;
-  animation: pulse 3s ease-in-out infinite;
+.pitch-step-text h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
 }
-
-.pitch-connector {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.pitch-connector line {
-  stroke: var(--accent);
-  stroke-width: 1;
-  opacity: 0.15;
-  stroke-dasharray: 6 4;
-  animation: drawLine 3s ease-in-out infinite alternate;
+.pitch-step-text p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 /* ======================== SLIDE 3: USE CASES ======================== */
@@ -1322,31 +1301,36 @@ section {
     <div class="pitch-layout">
       <div class="pitch-left reveal-left">
         <h2>We automate <span class="highlight">Knowledge Entry</span> workflows with an AI-first approach</h2>
-        <p>Businesses pour enormous time and money into repetitive data input — extracting information from documents, entering it into systems, validating and reconciling. Eldunari replaces these manual workflows with intelligent AI agents that are faster, cheaper, and more accurate.</p>
+        <p>Businesses pour enormous time and money into repetitive data input — extracting information from documents, entering it into systems, validating and reconciling. Eldunari replaces these manual workflows with intelligent AI agents.</p>
       </div>
-      <div class="pitch-visual reveal-right">
-        <svg class="pitch-connector" viewBox="0 0 500 400">
-          <line x1="160" y1="45" x2="250" y2="200" />
-          <line x1="380" y1="135" x2="250" y2="200" />
-          <line x1="160" y1="245" x2="250" y2="200" />
-          <line x1="380" y1="345" x2="250" y2="200" />
-        </svg>
-        <div class="pitch-center-orb"></div>
-        <div class="pitch-node node-docs">
-          <div class="pitch-node-icon">📄</div>
-          <div>Documents In</div>
+      <div class="pitch-steps reveal-right">
+        <div class="pitch-step pitch-step-1">
+          <div class="pitch-step-num">01</div>
+          <div class="pitch-step-text">
+            <h4>Documents In</h4>
+            <p>Ingest PDFs, scans, emails, spreadsheets</p>
+          </div>
         </div>
-        <div class="pitch-node node-extract">
-          <div class="pitch-node-icon">🔍</div>
-          <div>AI Extraction</div>
+        <div class="pitch-step pitch-step-2">
+          <div class="pitch-step-num">02</div>
+          <div class="pitch-step-text">
+            <h4>AI Extraction</h4>
+            <p>Intelligent data extraction and structuring</p>
+          </div>
         </div>
-        <div class="pitch-node node-validate">
-          <div class="pitch-node-icon">✓</div>
-          <div>Smart Validation</div>
+        <div class="pitch-step pitch-step-3">
+          <div class="pitch-step-num">03</div>
+          <div class="pitch-step-text">
+            <h4>Smart Validation</h4>
+            <p>Cross-reference and verify against rules</p>
+          </div>
         </div>
-        <div class="pitch-node node-enter">
-          <div class="pitch-node-icon">⚡</div>
-          <div>Auto-Entry</div>
+        <div class="pitch-step pitch-step-4">
+          <div class="pitch-step-num">04</div>
+          <div class="pitch-step-text">
+            <h4>Auto-Entry</h4>
+            <p>Populate target systems automatically</p>
+          </div>
         </div>
       </div>
     </div>
