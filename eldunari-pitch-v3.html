@@ -534,72 +534,74 @@ section {
 
 .problem-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 80px;
 }
 .problem-header h2 {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 4vw, 52px);
-  letter-spacing: -1.5px;
+  font-size: clamp(44px, 6vw, 72px);
+  letter-spacing: -2px;
   margin-bottom: 16px;
+  font-weight: 400;
+  line-height: 1.1;
 }
 .problem-header p {
   color: var(--text-secondary);
-  font-size: 17px;
+  font-size: 18px;
 }
 .problem-header .target-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
-  border-radius: 20px;
+  padding: 8px 20px;
+  border-radius: 40px;
   background: var(--accent-light);
-  border: 1px solid rgba(247, 140, 0, 0.15);
-  font-size: 13px;
+  font-size: 12px;
   color: var(--accent);
   font-weight: 600;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
 }
 
 .problem-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px;
+  gap: 32px;
   max-width: 800px;
-  margin: 0 auto 56px;
+  margin: 0 auto 72px;
 }
 
 .stat-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 40px;
+  border-radius: var(--radius);
+  padding: 48px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-soft);
 }
 
 .stat-number {
   font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(48px, 5vw, 72px);
+  font-size: clamp(56px, 7vw, 96px);
   font-weight: 500;
   color: var(--accent);
   line-height: 1;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .stat-label {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-secondary);
   font-weight: 400;
+  line-height: 1.6;
 }
 
 .problem-quote {
   text-align: center;
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: clamp(20px, 2.5vw, 26px);
+  font-size: clamp(24px, 3vw, 36px);
   color: var(--text-secondary);
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
   line-height: 1.5;
 }
@@ -1399,16 +1401,16 @@ section {
       <p>The hours and money lost to manual knowledge entry are staggering</p>
     </div>
     <div class="problem-stats">
-      <div class="stat-card reveal stagger-1">
+      <div class="stat-card magnify stagger-1">
         <div class="stat-number">~20%</div>
         <div class="stat-label">of productive time consumed by<br>knowledge entry tasks</div>
       </div>
-      <div class="stat-card reveal stagger-2">
+      <div class="stat-card magnify stagger-2">
         <div class="stat-number">~30%</div>
         <div class="stat-label">of operational costs tied to admin<br>data workflows</div>
       </div>
     </div>
-    <div class="problem-quote reveal stagger-3">
+    <div class="problem-quote magnify stagger-3">
       Every hour spent on data entry is an hour <span>not</span> spent on business development, client relationships, or strategic growth.
     </div>
   </div>
