@@ -235,98 +235,73 @@ section {
 #hero {
   text-align: center;
   background: var(--bg-primary);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #hero::before {
   content: '';
   position: absolute;
-  top: -200px;
+  top: -30%;
   left: 50%;
   transform: translateX(-50%);
-  width: 700px;
-  height: 700px;
+  width: 800px;
+  height: 800px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
-  animation: pulse 5s ease-in-out infinite;
-}
-
-.hero-orb-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 260px;
-  height: 260px;
-}
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-}
-.hero-orb-1 {
-  width: 8px; height: 8px;
-  background: var(--accent);
-  animation: orbit 9s linear infinite;
-  top: 50%; left: 50%;
-  box-shadow: 0 0 16px var(--accent);
-}
-.hero-orb-2 {
-  width: 5px; height: 5px;
-  background: var(--accent-dark);
-  animation: orbitReverse 13s linear infinite;
-  top: 50%; left: 50%;
-  box-shadow: 0 0 12px var(--accent-dark);
-}
-.hero-orb-3 {
-  width: 6px; height: 6px;
-  background: var(--gold);
-  animation: orbit 17s linear infinite reverse;
-  top: 50%; left: 50%;
-  box-shadow: 0 0 12px var(--gold);
+  background: radial-gradient(circle, rgba(247, 140, 0, 0.06) 0%, transparent 70%);
+  animation: gentlePulse 6s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 20px;
+  padding: 10px 24px;
   border-radius: 40px;
-  border: 1px solid rgba(247, 140, 0, 0.2);
   background: var(--accent-light);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--accent);
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 40px;
-  animation: fadeInUp 0.8s ease-out 0.2s both;
+  margin-bottom: 48px;
+  animation: heroBlurIn 1s var(--ease-spring) 0.2s both;
 }
 .hero-badge::before {
   content: '';
   width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--accent);
-  animation: pulse 2s ease-in-out infinite;
 }
 
 .hero-title {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(56px, 8vw, 110px);
-  line-height: 1.0;
-  letter-spacing: -3px;
-  margin-bottom: 12px;
-  animation: fadeInUp 0.8s ease-out 0.4s both;
+  font-size: clamp(72px, 10vw, 140px);
+  line-height: 0.95;
+  letter-spacing: -4px;
+  margin-bottom: 16px;
   color: var(--text-primary);
 }
 .hero-title .accent {
   color: var(--accent);
 }
+.hero-title-word {
+  display: inline-block;
+  animation: heroBlurIn 0.8s var(--ease-spring) both;
+}
+.hero-title-word:nth-child(1) { animation-delay: 0.3s; }
+.hero-title-word:nth-child(2) { animation-delay: 0.5s; }
 
 .hero-tagline {
-  font-size: clamp(20px, 2.5vw, 28px);
+  font-size: clamp(22px, 3vw, 32px);
   color: var(--text-secondary);
   font-weight: 300;
-  margin-top: 24px;
-  animation: fadeInUp 0.8s ease-out 0.6s both;
-  letter-spacing: -0.3px;
+  margin-top: 32px;
+  letter-spacing: -0.5px;
+  animation: heroBlurIn 0.8s var(--ease-spring) 0.7s both;
 }
 .hero-tagline em {
   font-style: italic;
@@ -336,12 +311,41 @@ section {
 }
 
 .hero-line {
-  width: 60px;
-  height: 3px;
+  width: 48px;
+  height: 2px;
   background: var(--accent);
-  margin: 40px auto 0;
-  animation: fadeInUp 0.8s ease-out 0.8s both;
-  border-radius: 2px;
+  margin: 48px auto 0;
+  animation: heroBlurIn 0.8s var(--ease-spring) 0.9s both;
+  border-radius: 1px;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: heroBlurIn 1s var(--ease-spring) 1.2s both;
+}
+.hero-scroll-hint span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.hero-scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
+  animation: heroScrollPulse 2s ease-in-out infinite;
+}
+@keyframes heroScrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+  50% { opacity: 0.8; transform: scaleY(1); }
 }
 
 /* ======================== SLIDE 2: THE PITCH ======================== */
@@ -1245,8 +1249,6 @@ section {
   transition: width 0.1s linear;
 }
 
-/* ======================== GRID BACKGROUND ======================== */
-
 /* ======================== RESPONSIVE ======================== */
 @media (max-width: 900px) {
   section { padding: 100px 28px; }
@@ -1300,23 +1302,22 @@ section {
 
 <!-- ==================== SLIDE 1: HERO ==================== -->
 <section id="hero">
-  <div class="grid-bg"></div>
-  <div class="hero-orb-container">
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-orb hero-orb-3"></div>
-  </div>
   <div class="section-inner" style="text-align:center;">
     <div class="hero-badge">AI-First Workflow Automation</div>
-    <h1 class="hero-title"><span class="accent">Eldunari</span>.ai</h1>
+    <h1 class="hero-title">
+      <span class="hero-title-word accent">Eldunari</span><span class="hero-title-word">.ai</span>
+    </h1>
     <p class="hero-tagline">Automate the Admin. <em>Unlock the Growth.</em></p>
     <div class="hero-line"></div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="hero-scroll-arrow"></div>
   </div>
 </section>
 
 <!-- ==================== SLIDE 2: THE PITCH ==================== -->
 <section id="pitch">
-  <div class="grid-bg"></div>
   <div class="section-inner">
     <div class="pitch-layout">
       <div class="pitch-left reveal-left">
@@ -1354,7 +1355,6 @@ section {
 
 <!-- ==================== SLIDE 3: USE CASES ==================== -->
 <section id="usecases">
-  <div class="grid-bg"></div>
   <div class="section-inner">
     <div class="usecases-header reveal">
       <h2>One capability. Endless applications.</h2>
@@ -1407,7 +1407,6 @@ section {
 
 <!-- ==================== SLIDE 4: THE PROBLEM ==================== -->
 <section id="problem">
-  <div class="grid-bg"></div>
   <div class="section-inner">
     <div class="problem-header reveal">
       <div class="target-badge">🎯 SMBs & Independent Consultants</div>
@@ -1432,7 +1431,6 @@ section {
 
 <!-- ==================== SLIDE 5: OUTSOURCING ==================== -->
 <section id="outsourcing">
-  <div class="grid-bg"></div>
   <div class="section-inner">
     <div class="outsource-header reveal">
       <h2>Offshore saves money.<br>But you pay in other ways.</h2>
@@ -1478,7 +1476,6 @@ section {
 
 <!-- ==================== SLIDE 6: AI UNLOCK ==================== -->
 <section id="ai-unlock">
-  <div class="grid-bg"></div>
   <div class="section-inner">
     <div class="ai-header reveal">
       <h2>AI doesn't just cut costs.<br>It changes the economics.</h2>
@@ -1523,7 +1520,6 @@ section {
 
 <!-- ==================== SLIDE 7: DATA CONTROL ==================== -->
 <section id="datacontrol">
-  <div class="grid-bg"></div>
   <div class="section-inner">
     <div class="dc-header reveal">
       <h2>Your data stays yours. Always.</h2>
@@ -1573,7 +1569,6 @@ section {
 
 <!-- ==================== SLIDE 8: CASE STUDIES ==================== -->
 <section id="cases">
-  <div class="grid-bg"></div>
   <div class="section-inner">
     <div class="cases-header reveal">
       <h2>Eldunari in Action</h2>
@@ -1639,7 +1634,6 @@ section {
 
 <!-- ==================== SLIDE 9: FOUNDERS ==================== -->
 <section id="founders">
-  <div class="grid-bg"></div>
   <div class="section-inner">
     <div class="founders-header reveal">
       <h2>The Founders</h2>
