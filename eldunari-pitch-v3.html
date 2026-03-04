@@ -938,15 +938,16 @@ section {
 
 .cases-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 72px;
 }
 .cases-header h2 {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 4vw, 52px);
-  letter-spacing: -1.5px;
+  font-size: clamp(44px, 6vw, 72px);
+  letter-spacing: -2px;
   margin-bottom: 16px;
+  font-weight: 400;
 }
-.cases-header p { color: var(--text-secondary); font-size: 17px; }
+.cases-header p { color: var(--text-secondary); font-size: 18px; }
 
 .cases-grid {
   display: grid;
@@ -956,17 +957,16 @@ section {
 
 .case-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 36px;
+  border-radius: var(--radius);
+  padding: 40px;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s ease;
-  box-shadow: var(--shadow-sm);
+  transition: all 0.4s var(--ease-spring);
+  box-shadow: var(--shadow-soft);
 }
 .case-card:hover {
-  border-color: rgba(247, 140, 0, 0.2);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.01);
 }
 .case-card::before {
   content: '';
@@ -979,34 +979,32 @@ section {
 
 .case-badge {
   display: inline-flex;
-  padding: 4px 12px;
-  border-radius: 6px;
+  padding: 5px 14px;
+  border-radius: 8px;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 20px;
 }
-.case-1 .case-badge { background: rgba(59, 130, 246, 0.08); color: var(--blue); }
+.case-1 .case-badge { background: rgba(59, 130, 246, 0.06); color: var(--blue); }
 .case-2 .case-badge { background: var(--accent-light); color: var(--accent); }
 
 .case-card h3 {
   font-family: 'Instrument Serif', serif;
-  font-size: 24px;
+  font-size: 26px;
   margin-bottom: 8px;
   letter-spacing: -0.5px;
   color: var(--text-primary);
 }
 .case-card .case-desc {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-muted);
-  margin-bottom: 24px;
-  line-height: 1.6;
+  margin-bottom: 28px;
+  line-height: 1.7;
 }
 
-.case-workflows {
-  margin-bottom: 28px;
-}
+.case-workflows { margin-bottom: 28px; }
 .case-workflows h4 {
   font-size: 11px;
   text-transform: uppercase;
@@ -1014,43 +1012,32 @@ section {
   color: var(--text-muted);
   margin-bottom: 12px;
 }
-.case-workflow-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+.case-workflow-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .case-tag {
-  padding: 5px 12px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
   background: var(--bg-secondary);
   font-size: 12px;
   color: var(--text-secondary);
-  border: 1px solid var(--border);
 }
 
 .case-impact {
   display: flex;
   gap: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  border-top: 1px solid rgba(0,0,0,0.05);
 }
-.case-impact-stat {
-  text-align: center;
-  flex: 1;
-}
+.case-impact-stat { text-align: center; flex: 1; }
 .case-impact-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 500;
   line-height: 1;
   margin-bottom: 6px;
 }
 .case-1 .case-impact-num { color: var(--blue); }
 .case-2 .case-impact-num { color: var(--accent); }
-.case-impact-label {
-  font-size: 12px;
-  color: var(--text-muted);
-}
+.case-impact-label { font-size: 12px; color: var(--text-muted); }
 
 /* ======================== SLIDE 9: FOUNDERS ======================== */
 #founders {
@@ -1059,17 +1046,18 @@ section {
 
 .founders-header {
   text-align: center;
-  margin-bottom: 72px;
+  margin-bottom: 80px;
 }
 .founders-header h2 {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 4vw, 52px);
-  letter-spacing: -1.5px;
+  font-size: clamp(44px, 6vw, 72px);
+  letter-spacing: -2px;
   margin-bottom: 16px;
+  font-weight: 400;
 }
 .founders-header p {
   color: var(--text-secondary);
-  font-size: 17px;
+  font-size: 18px;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -1084,20 +1072,18 @@ section {
 
 .founder-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 40px 36px;
+  border-radius: var(--radius);
+  padding: 44px 40px;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s ease;
-  box-shadow: var(--shadow-sm);
+  transition: all 0.4s var(--ease-spring);
+  box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
 }
 .founder-card:hover {
-  border-color: rgba(247, 140, 0, 0.2);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.01);
 }
 .founder-card::before {
   content: '';
@@ -1108,16 +1094,16 @@ section {
 }
 
 .founder-photo {
-  width: 80px;
-  height: 80px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   background: var(--accent-light);
-  border: 2px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
   overflow: hidden;
+  box-shadow: 0 4px 12px rgba(247, 140, 0, 0.1);
 }
 .founder-photo-placeholder {
   width: 100%;
@@ -1139,8 +1125,8 @@ section {
 
 .founder-role {
   display: inline-flex;
-  padding: 4px 12px;
-  border-radius: 6px;
+  padding: 5px 14px;
+  border-radius: 8px;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -1152,66 +1138,64 @@ section {
 
 .founder-card h3 {
   font-family: 'Instrument Serif', serif;
-  font-size: 22px;
+  font-size: 24px;
   letter-spacing: -0.5px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   color: var(--text-primary);
 }
 
 .founder-credentials {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 24px;
   flex: 1;
 }
 
 .founder-credential {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   font-size: 14px;
   color: var(--text-secondary);
   line-height: 1.5;
 }
 .founder-credential-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   flex-shrink: 0;
   margin-top: 1px;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-light);
 }
 
 .founder-education {
-  padding-top: 16px;
-  border-top: 1px solid var(--border-light);
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.05);
 }
 .founder-education-label {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: var(--text-muted);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 .founder-education-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
 }
 .founder-edu-tag {
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 5px 12px;
+  border-radius: 8px;
   background: var(--bg-secondary);
   font-size: 12px;
   color: var(--text-secondary);
-  border: 1px solid var(--border);
   font-weight: 500;
 }
 
@@ -1219,15 +1203,15 @@ section {
   text-align: center;
   max-width: 700px;
   margin: 0 auto;
-  padding: 32px 40px;
+  padding: 36px 44px;
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
 }
 .founders-summary p {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: clamp(18px, 2vw, 22px);
+  font-size: clamp(18px, 2.5vw, 24px);
   color: var(--text-secondary);
   line-height: 1.6;
 }
