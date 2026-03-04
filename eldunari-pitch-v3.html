@@ -1721,6 +1721,33 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
   observer.observe(el);
 });
 
+// ==================== MAGNIFICATION ENGINE ====================
+// Elements with .magnify scale from 0.6/30% opacity to full as they
+// reach the center of the viewport
+function updateMagnification() {
+  const magnifyEls = document.querySelectorAll('.magnify');
+  const viewportCenter = window.innerHeight / 2;
+
+  magnifyEls.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const elCenter = rect.top + rect.height / 2;
+    const distanceFromCenter = Math.abs(elCenter - viewportCenter);
+    const maxDistance = window.innerHeight * 0.5;
+
+    // Calculate progress: 1 when at center, 0 when far away
+    const progress = Math.max(0, 1 - (distanceFromCenter / maxDistance));
+
+    if (progress > 0.4) {
+      el.classList.add('in-focus');
+    } else {
+      el.classList.remove('in-focus');
+    }
+  });
+
+  requestAnimationFrame(updateMagnification);
+}
+requestAnimationFrame(updateMagnification);
+
 // ==================== COST BAR ANIMATION ====================
 const barObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1729,7 +1756,7 @@ const barObserver = new IntersectionObserver((entries) => {
       fills.forEach((fill, i) => {
         setTimeout(() => {
           fill.style.width = fill.dataset.width;
-        }, i * 300);
+        }, i * 400);
       });
     }
   });
@@ -1744,7 +1771,7 @@ window.addEventListener('scroll', () => {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrollPercent = (scrollTop / docHeight) * 100;
   document.getElementById('scrollProgress').style.width = scrollPercent + '%';
-});
+}, { passive: true });
 
 // ==================== NAV DOTS ====================
 const sections = document.querySelectorAll('section');
@@ -1768,6 +1795,56 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 
 sections.forEach(s => sectionObserver.observe(s));
+
+// ==================== COUNTER ANIMATION ====================
+// Animate stat numbers counting up when they come into view
+function animateCounter(el, target, duration) {
+  const isPercent = target.includes('%');
+  const isTilde = target.startsWith('~');
+  const prefix = isTilde ? '~' : '';
+  const numStr = target.replace(/[^0-9.]/g, '');
+  const num = parseFloat(numStr);
+  const suffix = target.replace(/[0-9.~]/g, '').trim();
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(num * eased * 10) / 10;
+
+    let display = prefix;
+    if (Number.isInteger(num)) {
+      display += Math.round(num * eased);
+    } else {
+      display += (num * eased).toFixed(1);
+    }
+    display += suffix;
+    el.textContent = display;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = target;
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      const target = entry.target.textContent;
+      animateCounter(entry.target, target, 1500);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number, .big-stat, .ws-num, .case-impact-num').forEach(el => {
+  counterObserver.observe(el);
+});
 </script>
 
 </body>
