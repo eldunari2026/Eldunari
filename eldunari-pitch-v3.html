@@ -617,15 +617,17 @@ section {
 
 .outsource-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 72px;
 }
 .outsource-header h2 {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 4vw, 52px);
-  letter-spacing: -1.5px;
+  font-size: clamp(44px, 6vw, 72px);
+  letter-spacing: -2px;
   margin-bottom: 16px;
+  font-weight: 400;
+  line-height: 1.1;
 }
-.outsource-header p { color: var(--text-secondary); font-size: 17px; }
+.outsource-header p { color: var(--text-secondary); font-size: 18px; }
 
 .outsource-layout {
   display: grid;
@@ -638,10 +640,13 @@ section {
 
 .outsource-side {
   background: var(--bg-card);
-  border-radius: 18px;
-  padding: 40px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius);
+  padding: 44px;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s var(--ease-spring);
+}
+.outsource-side:hover {
+  box-shadow: var(--shadow-hover);
 }
 
 .outsource-divider {
@@ -655,15 +660,15 @@ section {
 
 .outsource-good h3 {
   color: var(--accent);
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-weight: 600;
 }
 .outsource-good .big-stat {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 48px;
+  font-size: 56px;
   color: var(--accent);
   font-weight: 500;
   margin-bottom: 8px;
@@ -671,29 +676,30 @@ section {
 .outsource-good .big-label {
   color: var(--text-secondary);
   font-size: 15px;
+  line-height: 1.6;
 }
 
 .outsource-bad h3 {
   color: var(--red-soft);
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   font-weight: 600;
 }
 
 .outsource-risk {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 24px;
+  gap: 16px;
+  margin-bottom: 28px;
 }
 .outsource-risk:last-child { margin-bottom: 0; }
 .outsource-risk-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: rgba(229, 72, 77, 0.06);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(229, 72, 77, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -708,17 +714,17 @@ section {
   color: var(--text-primary);
 }
 .outsource-risk p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .outsource-bottom {
   text-align: center;
-  margin-top: 48px;
+  margin-top: 56px;
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 20px;
+  font-size: clamp(20px, 2.5vw, 28px);
   color: var(--text-secondary);
 }
 
