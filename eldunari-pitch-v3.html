@@ -8,27 +8,28 @@
 <style>
 :root {
   --bg-primary: #ffffff;
-  --bg-secondary: #FAFAF8;
+  --bg-secondary: #FDFCFA;
   --bg-card: #ffffff;
+  --bg-wash: rgba(247, 140, 0, 0.02);
   --accent: #F78C00;
-  --accent-dim: #F78C0012;
-  --accent-mid: #F78C0040;
-  --accent-light: #FFF5E6;
+  --accent-dim: #F78C0010;
+  --accent-mid: #F78C0030;
+  --accent-light: #FFF8F0;
   --accent-dark: #D97700;
-  --text-primary: #1a1a1a;
-  --text-secondary: #5c5c5c;
-  --text-muted: #9a9a9a;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #999999;
   --orange: #F78C00;
   --red-soft: #E5484D;
   --blue: #3B82F6;
   --purple: #8B5CF6;
   --gold: #F59E0B;
-  --border: #E8E8E6;
-  --border-light: #F0F0EE;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
-  --shadow-xl: 0 20px 60px rgba(0,0,0,0.1), 0 8px 20px rgba(0,0,0,0.04);
+  --shadow-soft: 0 2px 20px rgba(247, 140, 0, 0.04), 0 1px 4px rgba(0,0,0,0.02);
+  --shadow-hover: 0 8px 30px rgba(247, 140, 0, 0.08), 0 2px 8px rgba(0,0,0,0.03);
+  --shadow-lg: 0 16px 50px rgba(247, 140, 0, 0.1), 0 4px 16px rgba(0,0,0,0.04);
+  --radius: 20px;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,7 +43,7 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, sans-serif;
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -214,7 +215,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 64px;
+  padding: 160px 80px;
   position: relative;
   overflow: hidden;
 }
@@ -1241,15 +1242,6 @@ section {
 }
 
 /* ======================== GRID BACKGROUND ======================== */
-.grid-bg {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-}
 
 /* ======================== RESPONSIVE ======================== */
 @media (max-width: 900px) {
