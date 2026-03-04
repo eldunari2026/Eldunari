@@ -447,85 +447,84 @@ section {
 
 .usecases-header {
   text-align: center;
-  margin-bottom: 72px;
+  margin-bottom: 80px;
 }
 .usecases-header h2 {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 4vw, 52px);
-  letter-spacing: -1.5px;
+  font-size: clamp(44px, 6vw, 72px);
+  letter-spacing: -2px;
   margin-bottom: 16px;
+  font-weight: 400;
 }
 .usecases-header p {
   color: var(--text-secondary);
-  font-size: 17px;
+  font-size: 18px;
 }
 
 .usecases-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 .usecase-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 28px 22px;
-  text-align: center;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  transition: all 0.4s var(--ease-spring);
   position: relative;
   overflow: hidden;
   cursor: default;
-}
-.usecase-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  box-shadow: var(--shadow-soft);
 }
 .usecase-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(247, 140, 0, 0.25);
-  box-shadow: var(--shadow-lg);
-}
-.usecase-card:hover::before {
-  opacity: 1;
+  transform: scale(1.02);
+  box-shadow: var(--shadow-hover);
 }
 
 .usecase-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
-  margin: 0 auto 16px;
+  font-size: 24px;
+  margin-bottom: 20px;
+  background: var(--accent-light);
 }
 
 .usecase-card h3 {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 8px;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.3px;
   color: var(--text-primary);
 }
 .usecase-card p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-.uc-tax .usecase-icon { background: rgba(247, 140, 0, 0.08); }
-.uc-compliance .usecase-icon { background: rgba(59, 130, 246, 0.08); }
-.uc-finance .usecase-icon { background: rgba(139, 92, 246, 0.08); }
-.uc-legal .usecase-icon { background: rgba(247, 140, 0, 0.08); }
-.uc-insurance .usecase-icon { background: rgba(245, 158, 11, 0.08); }
-.uc-logistics .usecase-icon { background: rgba(229, 72, 77, 0.08); }
-.uc-realestate .usecase-icon { background: rgba(59, 130, 246, 0.08); }
+/* Feature cards span full width for variety */
+.usecase-card.featured {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 40px 36px;
+}
+.usecase-card.featured .usecase-icon {
+  margin-bottom: 0;
+  width: 64px;
+  height: 64px;
+  font-size: 28px;
+}
+.usecase-card.featured h3 {
+  font-size: 18px;
+}
 
 /* ======================== SLIDE 4: THE PROBLEM ======================== */
 #problem {
@@ -1341,47 +1340,49 @@ section {
 <section id="usecases">
   <div class="section-inner">
     <div class="usecases-header reveal">
-      <h2>One capability. Endless applications.</h2>
+      <h2>One capability.<br>Endless applications.</h2>
       <p>Knowledge Entry powers workflows across every industry</p>
     </div>
     <div class="usecases-grid">
-      <div class="usecase-card uc-tax reveal stagger-1">
-        <div class="usecase-icon">🧾</div>
-        <h3>Tax Filing</h3>
-        <p>Income, expenses & deductions extracted and entered into returns automatically</p>
+      <div class="usecase-card featured reveal stagger-1">
+        <div class="usecase-icon" style="background:rgba(247,140,0,0.08);">🧾</div>
+        <div>
+          <h3>Tax Filing</h3>
+          <p>Income, expenses & deductions extracted and entered into returns automatically</p>
+        </div>
       </div>
-      <div class="usecase-card uc-compliance reveal stagger-2">
-        <div class="usecase-icon">📋</div>
+      <div class="usecase-card reveal stagger-2">
+        <div class="usecase-icon" style="background:rgba(59,130,246,0.08);">📋</div>
         <h3>Regulatory & Compliance</h3>
         <p>Periodic submissions to regulators — RBI, SEBI, HMRC, SEC and more</p>
       </div>
-      <div class="usecase-card uc-finance reveal stagger-3">
-        <div class="usecase-icon">📊</div>
+      <div class="usecase-card reveal stagger-3">
+        <div class="usecase-icon" style="background:rgba(139,92,246,0.08);">📊</div>
         <h3>Financial Reporting</h3>
         <p>Journal entries, trial balance prep & consolidation data input</p>
       </div>
-      <div class="usecase-card uc-legal reveal stagger-4">
-        <div class="usecase-icon">⚖️</div>
+      <div class="usecase-card reveal stagger-4">
+        <div class="usecase-icon" style="background:rgba(247,140,0,0.08);">⚖️</div>
         <h3>Legal & Contracts</h3>
         <p>Clause extraction, contract metadata entry & IP filings</p>
       </div>
-      <div class="usecase-card uc-insurance reveal stagger-5">
-        <div class="usecase-icon">🛡️</div>
+      <div class="usecase-card reveal stagger-5">
+        <div class="usecase-icon" style="background:rgba(245,158,11,0.08);">🛡️</div>
         <h3>Insurance Claims</h3>
         <p>Claims capture, policy details & adjudication preparation</p>
       </div>
-      <div class="usecase-card uc-logistics reveal stagger-6">
-        <div class="usecase-icon">🚚</div>
+      <div class="usecase-card reveal stagger-6">
+        <div class="usecase-icon" style="background:rgba(229,72,77,0.08);">🚚</div>
         <h3>Logistics & Supply Chain</h3>
         <p>Purchase orders, invoices & customs documentation</p>
       </div>
-      <div class="usecase-card uc-realestate reveal stagger-7">
-        <div class="usecase-icon">🏢</div>
+      <div class="usecase-card reveal stagger-7">
+        <div class="usecase-icon" style="background:rgba(59,130,246,0.08);">🏢</div>
         <h3>Real Estate & Property</h3>
         <p>Lease data, tenant records & valuation inputs</p>
       </div>
-      <div class="usecase-card reveal stagger-8" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-style:dashed;border-color:var(--border);">
-        <div style="font-size:32px;margin-bottom:12px;opacity:0.3;">+</div>
+      <div class="usecase-card reveal stagger-8" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg-secondary);">
+        <div style="font-size:32px;margin-bottom:12px;opacity:0.2;">+</div>
         <h3 style="color:var(--text-muted);">And More</h3>
         <p>Any workflow involving structured data entry from unstructured sources</p>
       </div>
