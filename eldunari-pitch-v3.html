@@ -159,14 +159,13 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 16px 48px;
+  padding: 20px 56px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 }
 
 .nav-logo {
@@ -201,16 +200,16 @@ nav {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--border);
-  transition: all 0.4s ease;
+  background: rgba(0,0,0,0.1);
+  transition: all 0.5s var(--ease-spring);
   cursor: pointer;
   border: none;
 }
 .nav-dot.active {
   background: var(--accent);
-  box-shadow: 0 0 12px var(--accent-mid);
-  width: 24px;
+  width: 28px;
   border-radius: 4px;
+  box-shadow: 0 0 12px rgba(247, 140, 0, 0.3);
 }
 
 /* ======================== SECTIONS ======================== */
@@ -1227,25 +1226,26 @@ section {
   top: 0;
   left: 0;
   height: 2px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--gold));
   z-index: 200;
   transition: width 0.1s linear;
 }
 
 /* ======================== RESPONSIVE ======================== */
 @media (max-width: 900px) {
-  section { padding: 100px 28px; }
+  section { padding: 100px 24px; }
   nav { padding: 16px 24px; }
   .pitch-layout { grid-template-columns: 1fr; gap: 48px; }
-  .pitch-visual { height: 320px; }
-  .usecases-grid { grid-template-columns: repeat(2, 1fr); }
+  .usecases-grid { grid-template-columns: 1fr; }
+  .usecase-card.featured { grid-column: span 1; display: flex; flex-direction: column; }
   .problem-stats { grid-template-columns: 1fr; }
   .outsource-layout { grid-template-columns: 1fr; }
   .outsource-divider { padding: 20px 0; transform: rotate(90deg); }
   .dc-grid { grid-template-columns: 1fr; }
+  .dc-card:first-child { grid-column: span 1; display: flex; flex-direction: column; }
   .cases-grid { grid-template-columns: 1fr; }
   .cost-bar-row { grid-template-columns: 100px 1fr 60px; gap: 12px; }
-  .ai-whitespace { flex-direction: column; gap: 20px; }
+  .ai-whitespace { flex-direction: column; gap: 24px; }
   .founders-grid { grid-template-columns: 1fr; }
 }
 </style>
